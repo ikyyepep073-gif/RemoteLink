@@ -1,46 +1,32 @@
-name: Build Debug APK
+name: Build APK Debug
 
 on:
-  workflow_dispatch:   # ← manual trigger only (Actions tab → Run workflow)
+  workflow_dispatch:
 
 jobs:
   build:
-    name: Build Debug APK
+    name: Build APK Debug
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-        - nama: Ekstrak MVP RemoteLink
-  jalankan: |
-    unzip -o RemoteLink-MVP-siap-build.zip
-    rm RemoteLink-MVP-siap-build.zip
-
-      - name: Set up JDK 17
+      - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Gradle 8.8
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.8"
 
-      - name: Generate Gradle wrapper
-        run: gradle wrapper --gradle-version=8.8
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
-      - name: Build Debug APK
+      - name: Build APK
         run: ./gradlew assembleDebug
 
-      - name: Upload Debug APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: RemoteLink-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: aplikasi/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
-          retention-days: 7
