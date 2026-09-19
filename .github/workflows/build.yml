@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+        - nama: Ekstrak MVP RemoteLink
+  jalankan: |
+    unzip -o RemoteLink-MVP-siap-build.zip
+    rm RemoteLink-MVP-siap-build.zip
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
